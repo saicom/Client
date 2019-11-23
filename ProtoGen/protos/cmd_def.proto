@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+enum LoginId {
+    LoginId_Invalid = 0;
+    LoginId_Begin = 1;
+    LoginId_End = 100;
+}
+
+enum MessageId {
+	Msg_Start_Id  = 0;
+	LOGIN_CS_CREATE_ACCOUNT_REQ      =      1;		//	创建角色 **CSCreateAccountReq **login.proto **login-*,db-*;system:login
+	LOGIN_SC_CREATE_ACCOUNT_ACK      =      2;		//	创建角色结果 **SCCreateAccountAck **login.proto **login-*,gate-*;system:login
+	LOGIN_CS_LOGIN_REQ               =      3;		//	登录验证 **CSLoginReq **login.proto **login-*,db-*;system:login
+	LOGIN_SC_LOGIN_ACK               =      4;		//	登录验证结果 **SCLoginAck **login.proto **login-*,gate-*;system:login
+	LOGIN_CS_QUERY_SERVER_ADDR_REQ   =      5;		//	客户端请求gate服务器地址 **CSQueryServerAddrReq **login.proto **balance-*;system:login
+	LOGIN_SC_QUERY_SERVER_ADDR_ACK   =      6;		//	客户端请求gate服务器地址 **SCQueryServerAddrAck **login.proto **client-*;system:login
+	SERVER_CS_QUERY_GAME_ID_REQ      =    101;		//	请求游戏服务器id **CSQueryGameIdReq **server.proto **game-*;system:server
+	SERVER_SC_QUERY_GAME_ID_ACK      =    102;		//	请求游戏服务器id结果 **SCQueryGameIdAck **server.proto **gate-*;system:server
+	SERVER_SS_GAME_LOAD_NTF          =    103;		//	通知游戏服的负载人数 **SSGameLoadNtf **server.proto **gate-*;system:server
+	SERVER_CS_NOTIFY_GATE_ADDR_NTF   =    104;		//	gate服务器的地址通知 **CSNotifyGateAddrNtf **server.proto **balance-*;system:server
+	SERVER_SS_CLIENT_SESSION_CLOSE_NTF =    200;		//	客户端断开通知 **SSClientSessionCloseNtf **server.proto **game-*;system:user
+	GAME_CS_LOGIN_GAME_REQ           =   1001;		//	客户端登录请求 **CSLoginGameReq **client_game.proto **gate-*,game-*,db-*;system:login
+	GAME_SC_LOGIN_GAME_ACK           =   1002;		//	客户端登录回应 **SCLoginGameAck **client_game.proto **game-*;system:login
+	GAME_CS_SET_NICK_NAME_REQ        =   1200;		//	设置角色名 **CSSetNickNameReq **client_game.proto **game-*,db-*;system:user
+	GAME_SC_SET_NICK_NAME_ACK        =   1201;		//	设置角色名结果 **SCSetNickNameAck **client_game.proto **client-*;system:user
+	GAME_CS_GM_COMMAND_REQ           =   1202;		//	gm指令 **CSGMCommandReq **client_game.proto **game-*;system:user
+	GAME_SC_GM_COMMAND_ACK           =   1203;		//	gm指令结果 **SCGMCommandAck **client_game.proto **client-*;system:user
+	GAME_SC_KICK_USER_NTF            =   1204;		//	游戏服通知gate踢人 **SCKickUserNtf **client_game.proto **gate-*;system:user
+	GAME_SC_ERROR_NTF                =   1205;		//	通用错误协议 **SCErrorNtf **client_game.proto **client-*;system:user
+	GAME_SC_ITEM_CHANGE_NTF          =   1206;		//	背包道具变更通知 **SCItemChangeNtf **client_game.proto **client-*;system:user
+	GAME_CS_OPERATE_ITEM_REQ         =   1207;		//	使用/出售道具请求 **CSOperateItemReq **client_game.proto **game-*;system:user
+	GAME_SC_OPERATE_ITEM_ACK         =   1208;		//	使用/出售道具结果 **SCOperateItemAck **client_game.proto **client-*;system:user
+	GAME_SC_UPDATE_USER_BASE_INFO_NTF =   1209;		//	更新角色基础信息通知 **SCUpdateUserBaseInfoNtf **client_game.proto **client-*;system:user
+	GAME_CS_CHAT_REQ                 =   1210;		//	聊天请求 **CSChatReq **client_game.proto **game-*;system:user
+	GAME_SC_CHAT_ACK                 =   1211;		//	聊天回应 **SCChatAck **client_game.proto **client-*;system:user
+	GAME_CS_ADD_FRIEND_REQ           =   1400;		//	添加好友请求 **CSAddFriendReq **client_game.proto **game-*;system:friend
+	GAME_SC_ADD_FRIEND_ACK           =   1401;		//	添加好友回应 **SCAddFriendAck **client_game.proto **client-*;system:friend
+	GAME_SC_ADD_FRIEND_APPLY_NTF     =   1402;		//	好友申请通知 **SCAddFriendApplyNtf **client_game.proto **client-*;system:friend
+	GAME_CS_OPERATE_FRIEND_APPLY_REQ =   1403;		//	处理好友申请请求 **CSOperateFriendApplyReq **client_game.proto **game-*;system:friend
+	GAME_SC_OPERATE_FRIEND_APPLY_ACK =   1404;		//	处理好友申请回应 **SCOperateFriendApplyAck **client_game.proto **client-*;system:friend
+	GAME_SC_ADD_FRIEND_NTF           =   1405;		//	添加好友通知 **SCAddFriendNtf **client_game.proto **client-*;system:friend
+	GAME_CS_DELETE_FRIEND_REQ        =   1406;		//	删除好友请求 **CSDeleteFriendReq **client_game.proto **game-*;system:friend
+	GAME_SC_DELETE_FRIEND_ACK        =   1407;		//	删除好友回应 **SCDeleteFriendAck **client_game.proto **client-*;system:friend
+	GAME_SC_DELETE_FRIEND_NTF        =   1408;		//	删除好友通知 **SCDeleteFriendNtf **client_game.proto **client-*;system:friend
+	GAME_CS_QUERY_FRIEND_LIST_REQ    =   1409;		//	请求好友列表 **CSQueryFriendListReq **client_game.proto **game-*,db-*;system:friend
+	GAME_SC_QUERY_FRIEND_LIST_ACK    =   1410;		//	请求好友列表回应 **SCQueryFriendListAck **client_game.proto **game-*;system:friend
+	GAME_CS_FRIEND_POINT_OPERATE_REQ =   1411;		//	好友体力操作请求 **CSFriendPointOperateReq **client_game.proto **game-*;system:friend
+	GAME_SC_FRIEND_POINT_OPERATE_ACK =   1412;		//	好友体力操作回应 **SCFriendPointOperateAck **client_game.proto **client-*;system:friend
+	GAME_SC_FRIEND_POINT_RECV_NTF    =   1413;		//	收到好友体力通知 **SCFriendPointRecvNtf **client_game.proto **client-*;system:friend
+	GAME_CS_QUERY_FRIEND_APPLY_LIST_REQ =   1414;		//	请求好友申请列表 **CSQueryFriendApplyListReq **client_game.proto **game-*;system:friend
+	GAME_SC_QUERY_FRIEND_APPLY_LIST_ACK =   1415;		//	请求好友申请列表回应 **SCQueryFriendApplyListAck **client_game.proto **client-*;system:friend
+	GAME_SC_FRIEND_POINT_RECORD_NTF  =   1416;		//	SCFriendPointRecordNtf **SCFriendPointRecordNtf **client_game.proto **client-*;system:friend
+	DB_CS_QUERY_ROUTE_ID_REQ         =  20000;		//	dbrouter请求db的route id **CSQueryRouteIdReq **db.proto **db-*;system:server
+	DB_SC_QUERY_ROUTE_ID_ACK         =  20001;		//	db回应dbrouter routeid **SCQueryRouteIdAck **db.proto **db_router-db;system:server
+	DB_CS_QUERY_USER_ACCOUNT_REQ     =  20200;		//	查询角色 **CSQueryUserAccountReq **db.proto **db-*;system:login
+	DB_SC_QUERY_USER_ACCOUNT_ACK     =  20201;		//	查询结果 **SCQueryUserAccountAck **db.proto **game-*;system:login
+	DB_CS_CHECK_LOGIN_SESS_REQ       =  20202;		//	检验login sess合法性 **CSCheckLoginSessReq **db.proto **db-*;system:login
+	DB_SC_CHECK_LOGIN_SESS_ACK       =  20203;		//	检验login sess合法性结果 **SCCheckLoginSessAck **db.proto **game-*;system:login
+	DB_CS_SAVE_USER_BASE_REQ         =  20400;		//	保存玩家基本信息 **CSSaveUserBaseReq **db.proto **db-*;system:user
+	DB_CS_SAVE_USER_ITEM_REQ         =  20401;		//	保存玩家道具信息 **CSSaveUserItemReq **db.proto **db-*;system:user
+	DB_CS_SAVE_USER_FRIEND_REQ       =  20600;		//	保存玩家好友信息 **CSSaveUserFriendReq **db.proto **db-*;system:friend
+	DB_CS_DB_ADD_FRIEND_REQ          =  20601;		//	添加好友 **CSDbAddFriendReq **db.proto **db-*;system:friend
+	DB_CS_DB_DELETE_FRIEND_REQ       =  20602;		//	删除好友 **CSDbDeleteFriendReq **db.proto **db-*;system:friend
+}
+

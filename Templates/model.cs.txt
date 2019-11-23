@@ -1,0 +1,13 @@
+using UnityEngine;
+using System;
+using System.Collections;
+
+
+namespace Model
+{
+    public class #SCRIPTNAME#Model : Singleton<#SCRIPTNAME#Model>
+    {
+        
+
+	}
+}
