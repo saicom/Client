@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package game;
+
+
+//角色对象所有数据
+message RoleData
+{
+	RoleBaseInfo base_info = 1;
+	RoleBagInfo	bag_info = 2;
+	RoleFriendInfo	friend_info = 3;
+}
+
+//角色基础数据
+message RoleBaseInfo
+{
+	uint32 user_id = 1;		//角色id
+	string nick_name = 2;	//昵称
+	uint32 coin = 3;		//金币
+	uint32 diamond = 4;		//钻石
+	uint32 login_ts = 5;		//登录时间
+	uint32 logout_ts = 6;		//登出时间
+}
+
+enum EnumRoleBaseProp
+{
+	Prop_Nick_Name = 0;
+	Prop_Coin = 1;
+	Prop_Diamond = 2;
+}
+
+//道具信息
+message ItemInfo
+{
+	uint64 uid = 1;		// 实例id
+	int32 id = 2;		// 道具配置ID
+	uint32 count = 3;	// 道具数量
+}
+
+//角色背包数据
+message RoleBagInfo
+{
+	repeated ItemInfo items = 1;	// 玩家道具
+	uint32 bag_size = 2;		// 背包大小
+}
+
+//玩家基础信息
+message RoleBriefInfo
+{
+	uint32 user_id = 1;
+	uint32 user_level = 2;
+	string user_nick = 3;
+	uint32 head_frame_id = 4;
+	uint32 head_icon_id = 5;
+	uint32 login_ts = 6;
+	uint32 logout_ts = 7;
+	uint32 friend_cnt = 8;	//好友数量
+}
+
+//角色好友数据
+message RoleFriendInfo
+{
+	repeated uint32 apply_list = 1;			// 申请列表
+	repeated uint32 today_send_list = 2;		// 当天发送id列表
+	repeated uint32 today_recieve_list = 3;		// 当天接收id列表
+	repeated uint32 today_get_list = 4;		// 当天领取id列表
+}
