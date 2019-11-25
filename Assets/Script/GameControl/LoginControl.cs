@@ -22,8 +22,6 @@ namespace Ctrl
 
     public class LoginControl : UnitySingleton<LoginControl>
     {
-        private bool _connectGate = false;
-
         public String LoginAccountName
         {
             get;set;
@@ -71,9 +69,15 @@ namespace Ctrl
             Debug.Log("register visitor");
         }
 
-        public void EnterGame(UInt32 userId)
+        public void EnterGame()
         {
-            _connectGate = true;
+            uint userId = LoginModel.Instance.RecentUserId;
+            if(userId == 0)
+            {
+                LoginControl.Instance.RegisterVisitor();
+            }
+            Debug.LogError("enter game:"+userId);
+            StartConnectGate();
             //CSLoginGameReq req = new CSLoginGameReq();
             //req.UserId = userId;
             //NetworkManager.Instance.SendMsg(req, (int)MessageId.GameCsLoginGameReq);
@@ -170,15 +174,18 @@ namespace Ctrl
             if(serverType == ServerType.LoginServer) {
                 OnConnectLogin();
             }
+            else if(serverType == ServerType.GateServer){
+                Debug.LogError("connect gate success");
+            }
         }
 
         public void OnConnectFail(ServerType serverType)
         {
-            if (serverType == ServerType.BalanceServer)
+            if (serverType == ServerType.LoginServer)
             {
                 StartConnectLogin();
             }
-            else if (serverType == ServerType.BalanceServer)
+            else if (serverType == ServerType.GateServer)
             {
                 StartConnectGate();
             }
@@ -213,7 +220,7 @@ namespace Ctrl
         public void StartConnectGate()
         {
             CSQueryServerAddrReq req = new CSQueryServerAddrReq();
-            req.ZoneId = NoticeModel.Instance.NewServerId;
+            req.ZoneId = LoginModel.Instance.SelectServerId;
             NetworkManager.Instance.SendMsg(req, (int)MessageId.LoginCsQueryServerAddrReq);
         }
 
@@ -252,6 +259,12 @@ namespace Ctrl
         {
             SettingHelper.SetString(SettingDefine.AccountName, ack.AccountName);
             SettingHelper.SetString(SettingDefine.Password, ack.Passwd);
+            //ack.LoginSess;
+            //add user
+            LoginModel.Instance.RecentUserId = ack.UserId;
+            LoginModel.Instance.AddNewUser(ack.UserId);
+
+            EnterGame();
         }
     }
 }

@@ -46,24 +46,14 @@ namespace Model
                 if(loginTs <= userInfo.LastLoginTs)
                 {
                     RecentUserId = userInfo.UserId;
+                    SelectServerId = userInfo.ServerId;
                 }
             }
         }
 
         public cdnServerInfo GetShowServer()
         {
-            if (RecentUserId == 0)
-            {
-                return NoticeModel.Instance.GetServerInfoById(SelectServerId);
-            }
-
-            msgLoginUserInfo loginUserInfo;
-            if(m_UserDict.TryGetValue(RecentUserId, out loginUserInfo))
-            {
-                return NoticeModel.Instance.GetServerInfoById(loginUserInfo.ServerId);
-            }
-
-            return NoticeModel.Instance.GetNewServer();
+            return NoticeModel.Instance.GetServerInfoById(SelectServerId);
         }
 
         public cdnServerInfo GetServerInfo(int index)
@@ -79,5 +69,39 @@ namespace Model
             }
             return null;
         }
+
+        public void OnSelectServer(uint serverId)
+        {
+            SelectServerId = serverId;
+            List<msgLoginUserInfo> userList = new List<msgLoginUserInfo>();
+            foreach (KeyValuePair<uint, msgLoginUserInfo> pair in m_UserDict)
+            {
+                if(pair.Value.ServerId == serverId)
+                {
+                    userList.Add(pair.Value);
+                }
+            }
+            if(userList.Count == 0)
+            {
+                RecentUserId = 0;
+            }
+            else
+            {
+                RecentUserId = userList[0].UserId;
+            }
+        }
+
+        public void AddNewUser(SCCreateAccountAck ack)
+        {
+            RecentUserId = ack.UserId;
+            msgLoginUserInfo userInfo = new msgLoginUserInfo();
+            userInfo.UserId = ack.UserId;
+            userInfo.UserNick = ack.UserId.ToString();
+            userInfo.ServerId = SelectServerId;
+            m_UserDict.Add(RecentUserId, userInfo);
+
+            m_LoginSession = ack.LoginSess;
+        }
+
     }
 }
