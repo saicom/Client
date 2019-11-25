@@ -176,7 +176,6 @@ public class InfinityGridLayoutGroup : MonoBehaviour
 
     void ScrollCallback(Vector2 data)
     {
-        Debug.LogError("scroll ~~~");
         UpdateChildren();
     }
 

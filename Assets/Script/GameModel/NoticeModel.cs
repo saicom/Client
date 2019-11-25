@@ -15,15 +15,14 @@ public class cdnInfo
 {
     public string notice;
     public List<cdnServerInfo> serverList = new List<cdnServerInfo>();
-    public List<string> balanceList = new List<string>();
+    public List<string> loginList = new List<string>();
     public void Print()
     {
-        //Debug.LogError("notice:" + notice);
         foreach(cdnServerInfo info in serverList)
         {
             Debug.LogError("serverId:"+info.serverId + ",name:"+info.serverName + ",state:"+info.serverState);
         }
-        foreach(string l in balanceList)
+        foreach(string l in loginList)
         {
             Debug.LogError("server:"+l);
         }
@@ -34,8 +33,8 @@ namespace Model
 {
     public class NoticeModel : Singleton<NoticeModel>
     {
+        public uint NewServerId;
         private int _index = 0; //balance轮训索引
-        private uint _serverId = 0;  //默认选择服务器
         private Dictionary<uint, cdnServerInfo> _serverMap = new Dictionary<uint, cdnServerInfo>();
         private cdnInfo _cdnInfo;
         public cdnInfo ServerCdnInfo
@@ -47,37 +46,24 @@ namespace Model
             set
             {
                 _cdnInfo = value;
-                if(SettingHelper.HasSetting(SettingDefine.ServerId))
-                {
-                    _serverId = (uint)SettingHelper.GetInt(SettingDefine.ServerId);
-                }
-                else
-                {
-                    _serverId = _getNewestServerId();
-                }
+                NewServerId = _getNewestServerId();
+                LoginModel.Instance.SelectServerId = NewServerId;
             }
         }
 
-        public uint CurServerId
-        {
-            get
-            {
-                return _serverId;
-            }
-        }
 
         public void Reset()
         {
             _index = 0;
         }
 
-        public string RandBalanceAddr()
+        public string RandLoginAddr()
         {
-            if(_index >= ServerCdnInfo.balanceList.Count)
+            if(_index >= ServerCdnInfo.loginList.Count)
             {
                 return "";
             }
-            return ServerCdnInfo.balanceList[_index++];
+            return ServerCdnInfo.loginList[_index++];
         }
 
         private uint _getNewestServerId()
@@ -96,14 +82,14 @@ namespace Model
             return maxId;
         }
 
-        public cdnServerInfo GetSuggestServer()
+        public cdnServerInfo GetNewServer()
         {
-            if(_serverMap.ContainsKey(_serverId) == false)
+            if(_serverMap.ContainsKey(NewServerId) == false)
             {
                 return null;
             }
 
-            return _serverMap[_serverId];
+            return _serverMap[NewServerId];
         }
 
         public int GetServerCount()
@@ -119,5 +105,18 @@ namespace Model
             }
             return _cdnInfo.serverList[index];
         }
-	}
+
+        public cdnServerInfo GetServerInfoById(uint id)
+        {
+            for(int i = 0; i < _cdnInfo.serverList.Count; ++i)
+            {
+                if (id == _cdnInfo.serverList[i].serverId)
+                {
+                    return _cdnInfo.serverList[i];
+                }
+            }
+
+            return null;
+        }
+    }
 }

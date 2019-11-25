@@ -20,6 +20,10 @@ message RoleBaseInfo
 	uint32 diamond = 4;		//钻石
 	uint32 login_ts = 5;		//登录时间
 	uint32 logout_ts = 6;		//登出时间
+	uint32 user_level = 7;		//等级
+	uint32 user_exp = 8;		//经验
+	uint32 head_frame_id = 9;	//头像框
+	uint32 head_icon_id = 10;	//头像id
 }
 
 enum EnumRoleBaseProp

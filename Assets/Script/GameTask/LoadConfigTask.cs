@@ -13,7 +13,7 @@ namespace Task
                 OnComplete();
 
                 var task = TaskManager.Instance.GenerateTask<ConnectSrvTask>();
-                task.Init(Network.ServerType.BalanceServer);
+                task.Init(Network.ServerType.LoginServer);
             }
             else
             {

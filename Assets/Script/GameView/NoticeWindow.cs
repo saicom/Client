@@ -75,8 +75,6 @@ namespace View
 
         public override void Update(float deltaTime)
         {
-            Debug.LogError(m_txtNotice.rectTransform.sizeDelta.ToString() + "," + m_txtNotice.rectTransform.localPosition.ToString());
-            Debug.LogError(m_fscrollViewHeight);
             if(m_scrollRect.gameObject.activeSelf)
             {
                 if (m_txtNotice.rectTransform.localPosition.y + m_fscrollViewHeight > m_txtNotice.rectTransform.sizeDelta.y - 10)

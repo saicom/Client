@@ -20,8 +20,8 @@ public class MsgHandlerManager : Singleton<MsgHandlerManager> {
     public void Init()
     {
         Register(MessageId.LoginScQueryServerAddrAck, OnLoginScQueryServerAddrAck); 
-        //Register(MessageId.LoginScLoginAck, OnLoginScLoginAck); 
-        //Register(MessageId.LoginScCreateAccountAck, OnLoginScCreateAccountAck); 
+        Register(MessageId.LoginScLoginAck, OnLoginScLoginAck); 
+        Register(MessageId.LoginScCreateAccountAck, OnLoginScCreateAccountAck); 
         //Register(MessageId.GameScLoginGameAck, OnGameScLoginGameAck); 
         //Register(MessageId.GameScSetNickNameAck, OnGameScSetNickNameAck); 
         //Register(MessageId.GameScItemChangeNtf, OnGameScItemChangeNtf); 
@@ -86,56 +86,55 @@ public class MsgHandlerManager : Singleton<MsgHandlerManager> {
     }
 
     ///// 账号登录成功
-    //public void OnLoginScLoginAck(byte[] buffer, Int64 errCode)
-    //{
-    //    SCLoginAck msg = new SCLoginAck();
-    //    msg = SCLoginAck.Parser.ParseFrom(buffer);
-    //    if (msg == null)
-    //    {
-    //        Debug.LogError("parse msg faild OnLoginScLoginAck");
-    //        return;
-    //    }
+    public void OnLoginScLoginAck(byte[] buffer, Int64 errCode)
+    {
+        SCLoginAck msg = new SCLoginAck();
+        msg = SCLoginAck.Parser.ParseFrom(buffer);
+        if (msg == null)
+        {
+            Debug.LogError("parse msg faild OnLoginScLoginAck");
+            return;
+        }
 
-    //    if (msg.Result == (int)ErrorCode.NoError)
-    //    {
-    //        Debug.Log("login sucess " + msg.UserId);
-    //        LoginControl.Instance.OnLoginSucess(msg.UserId);
-    //        if(LoginControl.Instance.ChangeAccount == false)
-    //        {
-    //            LoginControl.Instance.EnterGame(msg.UserId);
-    //        }
+        if (msg.Result == (int)ErrorCode.NoError)
+        {
+            if(LoginControl.Instance.ChangeAccount == false)
+            {
+            }
+            LoginControl.Instance.OnLoginSucess(msg);
 
-    //        EventCenter.Broadcast(EGameEvent.eGameEvent_LoginSuccess);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("login fail " + (ErrorCode)msg.Result);
-    //        EventCenter.Broadcast(EGameEvent.eGameEvent_LoginFail);
-    //    }
-    //}
+            //EventCenter.Broadcast(EGameEvent.eGameEvent_LoginSuccess);
+        }
+        else
+        {
+            Debug.Log("login fail " + (ErrorCode)msg.Result);
+            //EventCenter.Broadcast(EGameEvent.eGameEvent_LoginFail);
+        }
+    }
 
-    //public void OnLoginScCreateAccountAck(byte[] buffer, Int64 errCode)
-    //{
-    //    SCCreateAccountAck msg = new SCCreateAccountAck();
-    //    msg = SCCreateAccountAck.Parser.ParseFrom(buffer);
-    //    if (msg == null)
-    //    {
-    //        Debug.LogError("parse msg faild SCCreateAccountAck");
-    //        return;
-    //    }
+    public void OnLoginScCreateAccountAck(byte[] buffer, Int64 errCode)
+    {
+        SCCreateAccountAck msg = new SCCreateAccountAck();
+        msg = SCCreateAccountAck.Parser.ParseFrom(buffer);
+        if (msg == null)
+        {
+            Debug.LogError("parse msg faild SCCreateAccountAck");
+            return;
+        }
 
-    //    if (msg.Result == (int)ErrorCode.NoError)
-    //    {
-    //        PlayerPrefs.SetString("UserName", msg.AccountName);
-    //        PlayerPrefs.SetString("Password", msg.Passwd);
-    //        Debug.Log("register visitor success,"  + msg.AccountName + "," + msg.Passwd);
-    //        LoginControl.Instance.EnterGame(msg.UserId);
-    //    }
-    //    else
-    //    {
-    //        EventCenter.Broadcast<int>(EGameEvent.eGameEvent_CreateAccountFail, msg.Result);
-    //    }
-    //}
+        if (msg.Result == (int)ErrorCode.NoError)
+        {
+            LoginControl.Instance.OnCreateAccountSuccess(msg);
+
+            Debug.Log("register visitor success," + msg.AccountName + "," + msg.Passwd);
+        }
+        else
+        {
+            //EventCenter.Broadcast<int>(EGameEvent.eGameEvent_InitGameFinish, msg.Result);
+            EventCenter.Broadcast(EGameEvent.eGameEvent_InitGameFinish);
+        }
+    }
+
     //public void OnGameScLoginGameAck(byte[] buffer, Int64 errCode)
     //{
     //    SCLoginGameAck msg = new SCLoginGameAck();

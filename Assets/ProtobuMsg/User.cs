@@ -25,25 +25,27 @@ namespace Game {
             "Cgp1c2VyLnByb3RvEgRnYW1lIoEBCghSb2xlRGF0YRIlCgliYXNlX2luZm8Y",
             "ASABKAsyEi5nYW1lLlJvbGVCYXNlSW5mbxIjCghiYWdfaW5mbxgCIAEoCzIR",
             "LmdhbWUuUm9sZUJhZ0luZm8SKQoLZnJpZW5kX2luZm8YAyABKAsyFC5nYW1l",
-            "LlJvbGVGcmllbmRJbmZvInYKDFJvbGVCYXNlSW5mbxIPCgd1c2VyX2lkGAEg",
-            "ASgNEhEKCW5pY2tfbmFtZRgCIAEoCRIMCgRjb2luGAMgASgNEg8KB2RpYW1v",
-            "bmQYBCABKA0SEAoIbG9naW5fdHMYBSABKA0SEQoJbG9nb3V0X3RzGAYgASgN",
-            "IjIKCEl0ZW1JbmZvEgsKA3VpZBgBIAEoBBIKCgJpZBgCIAEoBRINCgVjb3Vu",
-            "dBgDIAEoDSI+CgtSb2xlQmFnSW5mbxIdCgVpdGVtcxgBIAMoCzIOLmdhbWUu",
-            "SXRlbUluZm8SEAoIYmFnX3NpemUYAiABKA0irQEKDVJvbGVCcmllZkluZm8S",
-            "DwoHdXNlcl9pZBgBIAEoDRISCgp1c2VyX2xldmVsGAIgASgNEhEKCXVzZXJf",
-            "bmljaxgDIAEoCRIVCg1oZWFkX2ZyYW1lX2lkGAQgASgNEhQKDGhlYWRfaWNv",
-            "bl9pZBgFIAEoDRIQCghsb2dpbl90cxgGIAEoDRIRCglsb2dvdXRfdHMYByAB",
-            "KA0SEgoKZnJpZW5kX2NudBgIIAEoDSJxCg5Sb2xlRnJpZW5kSW5mbxISCgph",
-            "cHBseV9saXN0GAEgAygNEhcKD3RvZGF5X3NlbmRfbGlzdBgCIAMoDRIaChJ0",
-            "b2RheV9yZWNpZXZlX2xpc3QYAyADKA0SFgoOdG9kYXlfZ2V0X2xpc3QYBCAD",
-            "KA0qRwoQRW51bVJvbGVCYXNlUHJvcBISCg5Qcm9wX05pY2tfTmFtZRAAEg0K",
-            "CVByb3BfQ29pbhABEhAKDFByb3BfRGlhbW9uZBACYgZwcm90bzM="));
+            "LlJvbGVGcmllbmRJbmZvIskBCgxSb2xlQmFzZUluZm8SDwoHdXNlcl9pZBgB",
+            "IAEoDRIRCgluaWNrX25hbWUYAiABKAkSDAoEY29pbhgDIAEoDRIPCgdkaWFt",
+            "b25kGAQgASgNEhAKCGxvZ2luX3RzGAUgASgNEhEKCWxvZ291dF90cxgGIAEo",
+            "DRISCgp1c2VyX2xldmVsGAcgASgNEhAKCHVzZXJfZXhwGAggASgNEhUKDWhl",
+            "YWRfZnJhbWVfaWQYCSABKA0SFAoMaGVhZF9pY29uX2lkGAogASgNIjIKCEl0",
+            "ZW1JbmZvEgsKA3VpZBgBIAEoBBIKCgJpZBgCIAEoBRINCgVjb3VudBgDIAEo",
+            "DSI+CgtSb2xlQmFnSW5mbxIdCgVpdGVtcxgBIAMoCzIOLmdhbWUuSXRlbUlu",
+            "Zm8SEAoIYmFnX3NpemUYAiABKA0irQEKDVJvbGVCcmllZkluZm8SDwoHdXNl",
+            "cl9pZBgBIAEoDRISCgp1c2VyX2xldmVsGAIgASgNEhEKCXVzZXJfbmljaxgD",
+            "IAEoCRIVCg1oZWFkX2ZyYW1lX2lkGAQgASgNEhQKDGhlYWRfaWNvbl9pZBgF",
+            "IAEoDRIQCghsb2dpbl90cxgGIAEoDRIRCglsb2dvdXRfdHMYByABKA0SEgoK",
+            "ZnJpZW5kX2NudBgIIAEoDSJxCg5Sb2xlRnJpZW5kSW5mbxISCgphcHBseV9s",
+            "aXN0GAEgAygNEhcKD3RvZGF5X3NlbmRfbGlzdBgCIAMoDRIaChJ0b2RheV9y",
+            "ZWNpZXZlX2xpc3QYAyADKA0SFgoOdG9kYXlfZ2V0X2xpc3QYBCADKA0qRwoQ",
+            "RW51bVJvbGVCYXNlUHJvcBISCg5Qcm9wX05pY2tfTmFtZRAAEg0KCVByb3Bf",
+            "Q29pbhABEhAKDFByb3BfRGlhbW9uZBACYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::Game.EnumRoleBaseProp), }, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.RoleData), global::Game.RoleData.Parser, new[]{ "BaseInfo", "BagInfo", "FriendInfo" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Game.RoleBaseInfo), global::Game.RoleBaseInfo.Parser, new[]{ "UserId", "NickName", "Coin", "Diamond", "LoginTs", "LogoutTs" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Game.RoleBaseInfo), global::Game.RoleBaseInfo.Parser, new[]{ "UserId", "NickName", "Coin", "Diamond", "LoginTs", "LogoutTs", "UserLevel", "UserExp", "HeadFrameId", "HeadIconId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.ItemInfo), global::Game.ItemInfo.Parser, new[]{ "Uid", "Id", "Count" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.RoleBagInfo), global::Game.RoleBagInfo.Parser, new[]{ "Items", "BagSize" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Game.RoleBriefInfo), global::Game.RoleBriefInfo.Parser, new[]{ "UserId", "UserLevel", "UserNick", "HeadFrameId", "HeadIconId", "LoginTs", "LogoutTs", "FriendCnt" }, null, null, null),
@@ -290,6 +292,10 @@ namespace Game {
       diamond_ = other.diamond_;
       loginTs_ = other.loginTs_;
       logoutTs_ = other.logoutTs_;
+      userLevel_ = other.userLevel_;
+      userExp_ = other.userExp_;
+      headFrameId_ = other.headFrameId_;
+      headIconId_ = other.headIconId_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -381,6 +387,62 @@ namespace Game {
       }
     }
 
+    /// <summary>Field number for the "user_level" field.</summary>
+    public const int UserLevelFieldNumber = 7;
+    private uint userLevel_;
+    /// <summary>
+    /// 等级
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint UserLevel {
+      get { return userLevel_; }
+      set {
+        userLevel_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "user_exp" field.</summary>
+    public const int UserExpFieldNumber = 8;
+    private uint userExp_;
+    /// <summary>
+    /// 经验
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint UserExp {
+      get { return userExp_; }
+      set {
+        userExp_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "head_frame_id" field.</summary>
+    public const int HeadFrameIdFieldNumber = 9;
+    private uint headFrameId_;
+    /// <summary>
+    /// 头像框
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint HeadFrameId {
+      get { return headFrameId_; }
+      set {
+        headFrameId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "head_icon_id" field.</summary>
+    public const int HeadIconIdFieldNumber = 10;
+    private uint headIconId_;
+    /// <summary>
+    /// 头像id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint HeadIconId {
+      get { return headIconId_; }
+      set {
+        headIconId_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as RoleBaseInfo);
@@ -400,6 +462,10 @@ namespace Game {
       if (Diamond != other.Diamond) return false;
       if (LoginTs != other.LoginTs) return false;
       if (LogoutTs != other.LogoutTs) return false;
+      if (UserLevel != other.UserLevel) return false;
+      if (UserExp != other.UserExp) return false;
+      if (HeadFrameId != other.HeadFrameId) return false;
+      if (HeadIconId != other.HeadIconId) return false;
       return true;
     }
 
@@ -412,6 +478,10 @@ namespace Game {
       if (Diamond != 0) hash ^= Diamond.GetHashCode();
       if (LoginTs != 0) hash ^= LoginTs.GetHashCode();
       if (LogoutTs != 0) hash ^= LogoutTs.GetHashCode();
+      if (UserLevel != 0) hash ^= UserLevel.GetHashCode();
+      if (UserExp != 0) hash ^= UserExp.GetHashCode();
+      if (HeadFrameId != 0) hash ^= HeadFrameId.GetHashCode();
+      if (HeadIconId != 0) hash ^= HeadIconId.GetHashCode();
       return hash;
     }
 
@@ -446,6 +516,22 @@ namespace Game {
         output.WriteRawTag(48);
         output.WriteUInt32(LogoutTs);
       }
+      if (UserLevel != 0) {
+        output.WriteRawTag(56);
+        output.WriteUInt32(UserLevel);
+      }
+      if (UserExp != 0) {
+        output.WriteRawTag(64);
+        output.WriteUInt32(UserExp);
+      }
+      if (HeadFrameId != 0) {
+        output.WriteRawTag(72);
+        output.WriteUInt32(HeadFrameId);
+      }
+      if (HeadIconId != 0) {
+        output.WriteRawTag(80);
+        output.WriteUInt32(HeadIconId);
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -468,6 +554,18 @@ namespace Game {
       }
       if (LogoutTs != 0) {
         size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LogoutTs);
+      }
+      if (UserLevel != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UserLevel);
+      }
+      if (UserExp != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UserExp);
+      }
+      if (HeadFrameId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(HeadFrameId);
+      }
+      if (HeadIconId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(HeadIconId);
       }
       return size;
     }
@@ -494,6 +592,18 @@ namespace Game {
       }
       if (other.LogoutTs != 0) {
         LogoutTs = other.LogoutTs;
+      }
+      if (other.UserLevel != 0) {
+        UserLevel = other.UserLevel;
+      }
+      if (other.UserExp != 0) {
+        UserExp = other.UserExp;
+      }
+      if (other.HeadFrameId != 0) {
+        HeadFrameId = other.HeadFrameId;
+      }
+      if (other.HeadIconId != 0) {
+        HeadIconId = other.HeadIconId;
       }
     }
 
@@ -527,6 +637,22 @@ namespace Game {
           }
           case 48: {
             LogoutTs = input.ReadUInt32();
+            break;
+          }
+          case 56: {
+            UserLevel = input.ReadUInt32();
+            break;
+          }
+          case 64: {
+            UserExp = input.ReadUInt32();
+            break;
+          }
+          case 72: {
+            HeadFrameId = input.ReadUInt32();
+            break;
+          }
+          case 80: {
+            HeadIconId = input.ReadUInt32();
             break;
           }
         }

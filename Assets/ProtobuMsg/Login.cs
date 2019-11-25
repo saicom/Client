@@ -29,9 +29,13 @@ namespace Login {
             "ZBgDIAEoDRIRCglzZXJ2ZXJfaWQYBCABKA0ibwoSU0NDcmVhdGVBY2NvdW50",
             "QWNrEg4KBnJlc3VsdBgBIAEoBRIUCgxhY2NvdW50X25hbWUYAiABKAkSDgoG",
             "cGFzc3dkGAMgASgJEg8KB3VzZXJfaWQYBCABKA0SEgoKbG9naW5fc2VzcxgF",
-            "IAEoCSJHCgpDU0xvZ2luUmVxEhQKDGFjY291bnRfbmFtZRgBIAEoCRIOCgZw",
-            "YXNzd2QYAiABKAkSEwoLcGxhdGZvcm1faWQYAyABKA0iLQoKU0NMb2dpbkFj",
-            "axIOCgZyZXN1bHQYASABKAUSDwoHdXNlcl9pZBgCIAEoDWIGcHJvdG8z"));
+            "IAEoCSJ4ChBtc2dMb2dpblVzZXJJbmZvEg8KB3VzZXJfaWQYASABKA0SEQoJ",
+            "c2VydmVyX2lkGAIgASgNEhUKDWxhc3RfbG9naW5fdHMYAyABKA0SEQoJdXNl",
+            "cl9uaWNrGAQgASgJEhYKDnVzZXJfaGVhZF9pY29uGAUgASgNIkcKCkNTTG9n",
+            "aW5SZXESFAoMYWNjb3VudF9uYW1lGAEgASgJEg4KBnBhc3N3ZBgCIAEoCRIT",
+            "CgtwbGF0Zm9ybV9pZBgDIAEoDSJcCgpTQ0xvZ2luQWNrEg4KBnJlc3VsdBgB",
+            "IAEoBRIqCgl1c2VyX2xpc3QYAiADKAsyFy5sb2dpbi5tc2dMb2dpblVzZXJJ",
+            "bmZvEhIKCmxvZ2luX3Nlc3MYAyABKAliBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -39,8 +43,9 @@ namespace Login {
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCQueryServerAddrAck), global::Login.SCQueryServerAddrAck.Parser, new[]{ "ServerAddr" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.CSCreateAccountReq), global::Login.CSCreateAccountReq.Parser, new[]{ "AccountName", "Passwd", "PlatformId", "ServerId" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCCreateAccountAck), global::Login.SCCreateAccountAck.Parser, new[]{ "Result", "AccountName", "Passwd", "UserId", "LoginSess" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Login.msgLoginUserInfo), global::Login.msgLoginUserInfo.Parser, new[]{ "UserId", "ServerId", "LastLoginTs", "UserNick", "UserHeadIcon" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.CSLoginReq), global::Login.CSLoginReq.Parser, new[]{ "AccountName", "Passwd", "PlatformId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCLoginAck), global::Login.SCLoginAck.Parser, new[]{ "Result", "UserId" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCLoginAck), global::Login.SCLoginAck.Parser, new[]{ "Result", "UserList", "LoginSess" }, null, null, null)
           }));
     }
     #endregion
@@ -733,6 +738,253 @@ namespace Login {
   }
 
   /// <summary>
+  /// 角色信息
+  /// </summary>
+  public sealed partial class msgLoginUserInfo : pb::IMessage<msgLoginUserInfo> {
+    private static readonly pb::MessageParser<msgLoginUserInfo> _parser = new pb::MessageParser<msgLoginUserInfo>(() => new msgLoginUserInfo());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<msgLoginUserInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Login.LoginReflection.Descriptor.MessageTypes[4]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public msgLoginUserInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public msgLoginUserInfo(msgLoginUserInfo other) : this() {
+      userId_ = other.userId_;
+      serverId_ = other.serverId_;
+      lastLoginTs_ = other.lastLoginTs_;
+      userNick_ = other.userNick_;
+      userHeadIcon_ = other.userHeadIcon_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public msgLoginUserInfo Clone() {
+      return new msgLoginUserInfo(this);
+    }
+
+    /// <summary>Field number for the "user_id" field.</summary>
+    public const int UserIdFieldNumber = 1;
+    private uint userId_;
+    /// <summary>
+    /// 角色id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "server_id" field.</summary>
+    public const int ServerIdFieldNumber = 2;
+    private uint serverId_;
+    /// <summary>
+    /// 所在服务器id
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint ServerId {
+      get { return serverId_; }
+      set {
+        serverId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "last_login_ts" field.</summary>
+    public const int LastLoginTsFieldNumber = 3;
+    private uint lastLoginTs_;
+    /// <summary>
+    /// 上次登录时间
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint LastLoginTs {
+      get { return lastLoginTs_; }
+      set {
+        lastLoginTs_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "user_nick" field.</summary>
+    public const int UserNickFieldNumber = 4;
+    private string userNick_ = "";
+    /// <summary>
+    /// 角色昵称
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string UserNick {
+      get { return userNick_; }
+      set {
+        userNick_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "user_head_icon" field.</summary>
+    public const int UserHeadIconFieldNumber = 5;
+    private uint userHeadIcon_;
+    /// <summary>
+    /// 头像
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint UserHeadIcon {
+      get { return userHeadIcon_; }
+      set {
+        userHeadIcon_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as msgLoginUserInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(msgLoginUserInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (UserId != other.UserId) return false;
+      if (ServerId != other.ServerId) return false;
+      if (LastLoginTs != other.LastLoginTs) return false;
+      if (UserNick != other.UserNick) return false;
+      if (UserHeadIcon != other.UserHeadIcon) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (UserId != 0) hash ^= UserId.GetHashCode();
+      if (ServerId != 0) hash ^= ServerId.GetHashCode();
+      if (LastLoginTs != 0) hash ^= LastLoginTs.GetHashCode();
+      if (UserNick.Length != 0) hash ^= UserNick.GetHashCode();
+      if (UserHeadIcon != 0) hash ^= UserHeadIcon.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (UserId != 0) {
+        output.WriteRawTag(8);
+        output.WriteUInt32(UserId);
+      }
+      if (ServerId != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(ServerId);
+      }
+      if (LastLoginTs != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(LastLoginTs);
+      }
+      if (UserNick.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(UserNick);
+      }
+      if (UserHeadIcon != 0) {
+        output.WriteRawTag(40);
+        output.WriteUInt32(UserHeadIcon);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (UserId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UserId);
+      }
+      if (ServerId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ServerId);
+      }
+      if (LastLoginTs != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(LastLoginTs);
+      }
+      if (UserNick.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserNick);
+      }
+      if (UserHeadIcon != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UserHeadIcon);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(msgLoginUserInfo other) {
+      if (other == null) {
+        return;
+      }
+      if (other.UserId != 0) {
+        UserId = other.UserId;
+      }
+      if (other.ServerId != 0) {
+        ServerId = other.ServerId;
+      }
+      if (other.LastLoginTs != 0) {
+        LastLoginTs = other.LastLoginTs;
+      }
+      if (other.UserNick.Length != 0) {
+        UserNick = other.UserNick;
+      }
+      if (other.UserHeadIcon != 0) {
+        UserHeadIcon = other.UserHeadIcon;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            UserId = input.ReadUInt32();
+            break;
+          }
+          case 16: {
+            ServerId = input.ReadUInt32();
+            break;
+          }
+          case 24: {
+            LastLoginTs = input.ReadUInt32();
+            break;
+          }
+          case 34: {
+            UserNick = input.ReadString();
+            break;
+          }
+          case 40: {
+            UserHeadIcon = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
   /// 登录验证
   /// </summary>
   public sealed partial class CSLoginReq : pb::IMessage<CSLoginReq> {
@@ -742,7 +994,7 @@ namespace Login {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Login.LoginReflection.Descriptor.MessageTypes[4]; }
+      get { return global::Login.LoginReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -918,7 +1170,7 @@ namespace Login {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::Login.LoginReflection.Descriptor.MessageTypes[5]; }
+      get { return global::Login.LoginReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -936,7 +1188,8 @@ namespace Login {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public SCLoginAck(SCLoginAck other) : this() {
       result_ = other.result_;
-      userId_ = other.userId_;
+      userList_ = other.userList_.Clone();
+      loginSess_ = other.loginSess_;
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -955,14 +1208,24 @@ namespace Login {
       }
     }
 
-    /// <summary>Field number for the "user_id" field.</summary>
-    public const int UserIdFieldNumber = 2;
-    private uint userId_;
+    /// <summary>Field number for the "user_list" field.</summary>
+    public const int UserListFieldNumber = 2;
+    private static readonly pb::FieldCodec<global::Login.msgLoginUserInfo> _repeated_userList_codec
+        = pb::FieldCodec.ForMessage(18, global::Login.msgLoginUserInfo.Parser);
+    private readonly pbc::RepeatedField<global::Login.msgLoginUserInfo> userList_ = new pbc::RepeatedField<global::Login.msgLoginUserInfo>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public uint UserId {
-      get { return userId_; }
+    public pbc::RepeatedField<global::Login.msgLoginUserInfo> UserList {
+      get { return userList_; }
+    }
+
+    /// <summary>Field number for the "login_sess" field.</summary>
+    public const int LoginSessFieldNumber = 3;
+    private string loginSess_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string LoginSess {
+      get { return loginSess_; }
       set {
-        userId_ = value;
+        loginSess_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -980,7 +1243,8 @@ namespace Login {
         return true;
       }
       if (Result != other.Result) return false;
-      if (UserId != other.UserId) return false;
+      if(!userList_.Equals(other.userList_)) return false;
+      if (LoginSess != other.LoginSess) return false;
       return true;
     }
 
@@ -988,7 +1252,8 @@ namespace Login {
     public override int GetHashCode() {
       int hash = 1;
       if (Result != 0) hash ^= Result.GetHashCode();
-      if (UserId != 0) hash ^= UserId.GetHashCode();
+      hash ^= userList_.GetHashCode();
+      if (LoginSess.Length != 0) hash ^= LoginSess.GetHashCode();
       return hash;
     }
 
@@ -1003,9 +1268,10 @@ namespace Login {
         output.WriteRawTag(8);
         output.WriteInt32(Result);
       }
-      if (UserId != 0) {
-        output.WriteRawTag(16);
-        output.WriteUInt32(UserId);
+      userList_.WriteTo(output, _repeated_userList_codec);
+      if (LoginSess.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(LoginSess);
       }
     }
 
@@ -1015,8 +1281,9 @@ namespace Login {
       if (Result != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Result);
       }
-      if (UserId != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UserId);
+      size += userList_.CalculateSize(_repeated_userList_codec);
+      if (LoginSess.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(LoginSess);
       }
       return size;
     }
@@ -1029,8 +1296,9 @@ namespace Login {
       if (other.Result != 0) {
         Result = other.Result;
       }
-      if (other.UserId != 0) {
-        UserId = other.UserId;
+      userList_.Add(other.userList_);
+      if (other.LoginSess.Length != 0) {
+        LoginSess = other.LoginSess;
       }
     }
 
@@ -1046,8 +1314,12 @@ namespace Login {
             Result = input.ReadInt32();
             break;
           }
-          case 16: {
-            UserId = input.ReadUInt32();
+          case 18: {
+            userList_.AddEntriesFrom(input, _repeated_userList_codec);
+            break;
+          }
+          case 26: {
+            LoginSess = input.ReadString();
             break;
           }
         }

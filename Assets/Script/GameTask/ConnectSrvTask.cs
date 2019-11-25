@@ -10,10 +10,10 @@ namespace Task
         public void Init(ServerType type)
         {
             serverType = type;
-            if(serverType == ServerType.BalanceServer)
+            if(serverType == ServerType.LoginServer)
             {
-                EventCenter.Broadcast<string>(EGameEvent.eGameEvent_TipMsgChange, "连接负载均衡服...");
-                LoginControl.Instance.StartConnectBalance();
+                EventCenter.Broadcast<string>(EGameEvent.eGameEvent_TipMsgChange, "连接登录服...");
+                LoginControl.Instance.StartConnectLogin();
             }
             else if (serverType == ServerType.GateServer)
             {
@@ -28,8 +28,6 @@ namespace Task
             if(NetworkManager.Instance.IsConnectServer(serverType))
             {
                 OnComplete();
-                var task = TaskManager.Instance.GenerateTask<LoadNoticeTask>();
-                task.Init();
             }
         }
     }

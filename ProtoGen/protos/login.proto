@@ -37,6 +37,16 @@ message SCCreateAccountAck	//proj:login-*|gate-*;system:login
 	string login_sess = 5;
 }
 
+//角色信息
+message msgLoginUserInfo
+{
+	uint32 user_id = 1;		//角色id
+	uint32 server_id = 2;		//所在服务器id
+	uint32 last_login_ts = 3;	//上次登录时间
+	string user_nick = 4;		//角色昵称
+	uint32 user_head_icon = 5;	//头像
+}
+
 //登录验证
 message CSLoginReq //proj:login-*|db-*;system:login
 {
@@ -49,5 +59,6 @@ message CSLoginReq //proj:login-*|db-*;system:login
 message SCLoginAck //proj:login-*|gate-*;system:login
 {
 	int32 result = 1;
-	uint32 user_id = 2;
+	repeated msgLoginUserInfo user_list = 2;
+	string login_sess = 3;
 }

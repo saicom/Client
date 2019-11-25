@@ -12,8 +12,14 @@ using System.Collections.Generic;
 using Model;
 using Task;
 
+
 namespace Ctrl
 {
+    public enum EPlatformId
+    {
+        Official = 0,
+    }
+
     public class LoginControl : UnitySingleton<LoginControl>
     {
         private bool _connectGate = false;
@@ -32,10 +38,6 @@ namespace Ctrl
             get;set;
         }
 
-        public UInt32 UserId
-        {
-            get;set;
-        }
 
         public void Enter()
         {
@@ -53,7 +55,7 @@ namespace Ctrl
             CSLoginReq req = new CSLoginReq();
             req.AccountName = account;
             req.Passwd = pass;
-            req.PlatformId = 1;
+            req.PlatformId = (uint)EPlatformId.Official;
             LoginAccountName = account;
             LoginPassword = pass;
             NetworkManager.Instance.SendMsg(req, (int)MessageId.LoginCsLoginReq);
@@ -63,8 +65,8 @@ namespace Ctrl
         public void RegisterVisitor()
         {
             CSCreateAccountReq req = new CSCreateAccountReq();
-            req.PlatformId = 1;
-            req.ServerId = 1;
+            req.PlatformId = (uint)EPlatformId.Official;
+            req.ServerId = LoginModel.Instance.SelectServerId;
             NetworkManager.Instance.SendMsg(req, (int)MessageId.LoginCsCreateAccountReq);
             Debug.Log("register visitor");
         }
@@ -90,11 +92,16 @@ namespace Ctrl
 
         /*************************处理回调****************************/
 
-        public void OnLoginSucess(UInt32 userId)
+        public void OnLoginSucess(SCLoginAck ack)
         {
-            UserId = userId;
-            PlayerPrefs.SetString("UserName", LoginAccountName);
-            PlayerPrefs.SetString("Password", LoginPassword);
+            Debug.LogError("login success");
+            LoginModel.Instance.OnLoginAck(ack);
+
+            ChangeAccount = false;
+
+            //拉取公告
+            var task = TaskManager.Instance.GenerateTask<LoadNoticeTask>();
+            task.Init();
         }
 
         //登陆错误反馈
@@ -160,13 +167,16 @@ namespace Ctrl
             UIUtils.CloseWaitingWnd();
             NoticeModel.Instance.Reset();
             LoginModel.Instance.Reset();
+            if(serverType == ServerType.LoginServer) {
+                OnConnectLogin();
+            }
         }
 
         public void OnConnectFail(ServerType serverType)
         {
             if (serverType == ServerType.BalanceServer)
             {
-                StartConnectBalance();
+                StartConnectLogin();
             }
             else if (serverType == ServerType.BalanceServer)
             {
@@ -180,11 +190,11 @@ namespace Ctrl
             InitGame();
         }
 
-        public void StartConnectBalance()
+        public void StartConnectLogin()
         {
             while (true)
             {
-                string addr = NoticeModel.Instance.RandBalanceAddr();
+                string addr = NoticeModel.Instance.RandLoginAddr();
                 if (addr == "")
                 {
                     if (LoginModel.Instance.TryConnect())
@@ -195,7 +205,7 @@ namespace Ctrl
                     EventCenter.Broadcast(EGameEvent.eGameEvent_InitGameFail);
                     break;
                 }
-                NetworkManager.Instance.ConnectServer(addr, ServerType.BalanceServer);
+                NetworkManager.Instance.ConnectServer(addr, ServerType.LoginServer);
                 break;
             }
         }
@@ -203,7 +213,7 @@ namespace Ctrl
         public void StartConnectGate()
         {
             CSQueryServerAddrReq req = new CSQueryServerAddrReq();
-            req.ZoneId = NoticeModel.Instance.CurServerId;
+            req.ZoneId = NoticeModel.Instance.NewServerId;
             NetworkManager.Instance.SendMsg(req, (int)MessageId.LoginCsQueryServerAddrReq);
         }
 
@@ -223,9 +233,25 @@ namespace Ctrl
             LoginModel.Instance.GateAddress = addr;
         }
 
-        private bool CheckConnectStatus(ServerType type)
+        private void OnConnectLogin()
         {
-            return NetworkManager.Instance.IsConnectServer(type);
+            if(SettingHelper.HasSetting("AccountName") == false)
+            {
+                //本地无账号，则直接弹公告
+                var task = TaskManager.Instance.GenerateTask<LoadNoticeTask>();
+                task.Init();
+            }
+            else
+            {
+                string accountName = SettingHelper.GetString(SettingDefine.AccountName);
+                string password = SettingHelper.GetString(SettingDefine.Password);
+                Login(accountName, password);
+            }
+        }
+        public void OnCreateAccountSuccess(SCCreateAccountAck ack)
+        {
+            SettingHelper.SetString(SettingDefine.AccountName, ack.AccountName);
+            SettingHelper.SetString(SettingDefine.Password, ack.Passwd);
         }
     }
 }

@@ -1299,8 +1299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66023618d3c5fdd42a91c4636f81b6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickSound: {fileID: 0}
-  pressStyle: 1
+  ClickSound: {fileID: 8300000, guid: 510fd6e2f85f3a54e938fb25f40303f4, type: 3}
+  pressStyle: 0
   pressCoef: 1.1
 --- !u!114 &114138528036373166
 MonoBehaviour:
@@ -1670,7 +1670,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6700\u8FD1\u767B\u5F55"
+  m_Text: "\u6240\u5C5E\u670D\u52A1\u5668"
 --- !u!114 &114257988607605452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1767,7 +1767,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 5
     m_Right: 0
-    m_Top: 0
+    m_Top: 15
     m_Bottom: 0
   m_ChildAlignment: 0
   m_Spacing: 10
@@ -2255,8 +2255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66023618d3c5fdd42a91c4636f81b6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickSound: {fileID: 0}
-  pressStyle: 1
+  ClickSound: {fileID: 8300000, guid: 510fd6e2f85f3a54e938fb25f40303f4, type: 3}
+  pressStyle: 0
   pressCoef: 1.1
 --- !u!114 &114572152913767502
 MonoBehaviour:
@@ -2715,8 +2715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66023618d3c5fdd42a91c4636f81b6f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ClickSound: {fileID: 0}
-  pressStyle: 1
+  ClickSound: {fileID: 8300000, guid: 510fd6e2f85f3a54e938fb25f40303f4, type: 3}
+  pressStyle: 0
   pressCoef: 1.1
 --- !u!114 &114767001950336708
 MonoBehaviour:
@@ -2730,7 +2730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.259}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2757,7 +2757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.9488844, b: 0.53676474, a: 1}
+  m_Color: {r: 0.9862069, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -4148,8 +4148,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -469.65, y: -0.049972534}
-  m_SizeDelta: {x: 451.1, y: -47.7}
+  m_AnchoredPosition: {x: -469.65, y: -5.850006}
+  m_SizeDelta: {x: 451.1, y: -53.45}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224618210671513698
 RectTransform:
@@ -4524,8 +4524,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -8.74}
+  m_SizeDelta: {x: 0, y: -12.72}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224938845067220792
 RectTransform:

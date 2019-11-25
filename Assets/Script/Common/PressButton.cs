@@ -9,6 +9,7 @@ using System;
 
 public enum PressStyle
 {
+    Press_Invalid,
     Press_Shrink,
     Press_Bounce,
 }

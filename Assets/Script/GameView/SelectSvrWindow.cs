@@ -44,9 +44,9 @@ namespace View
             m_infinityScrollView = mRoot.Find("Bg/FrameBody/ServerList/Viewport/Content").GetComponent<InfinityGridLayoutGroup>();
             m_rectContent = m_infinityScrollView.transform.GetComponent<RectTransform>();
             m_scrollView = mRoot.Find("Bg/FrameBody/ServerList").GetComponent<ScrollRect>();
-            m_togBelong = mRoot.Find("Bg/Frame/Menu/BelongSvr").GetComponent<Toggle>();
-            m_togSuggest = mRoot.Find("Bg/Frame/Menu/SuggestSvr").GetComponent<Toggle>();
-            m_togAll = mRoot.Find("Bg/Frame/Menu/AllSvr").GetComponent<Toggle>();
+            m_togBelong = mRoot.Find("Bg/FrameBody/Menu/BelongSvr").GetComponent<Toggle>();
+            m_togSuggest = mRoot.Find("Bg/FrameBody/Menu/SuggestSvr").GetComponent<Toggle>();
+            m_togAll = mRoot.Find("Bg/FrameBody/Menu/AllSvr").GetComponent<Toggle>();
 
             m_btnClose.onClick.AddListener(OnClickClose);
             m_togBelong.onValueChanged.AddListener(onClickMenu);
@@ -89,31 +89,40 @@ namespace View
             m_tweenScale.OnComplete = () => { m_scrollView.enabled = true; };
             m_tweenScale.PlayForward();
 
-            int count = NoticeModel.Instance.GetServerCount();
+            if(LoginModel.Instance.RecentUserId == 0)
+            {
+                m_togBelong.gameObject.SetActive(false);
+                m_togBelong.isOn = false;
+                m_togSuggest.isOn = true;
+                m_serverTabType = EServerTabType.SuggetServer;
+            }
+
+            int count = _getServerCount();
             m_infinityScrollView.SetAmount(count);
             m_infinityScrollView.updateChildrenCallback = UpdateChildrenCallback;
-            for (int i = 0; i < m_rectContent.childCount; i++)
-            {
-                var child = m_rectContent.GetChild(i);
-                UpdateChildrenCallback(i, child);
-            }
+            //for (int i = 0; i < m_rectContent.childCount; i++)
+            //{
+            //    var child = m_rectContent.GetChild(i);
+            //    UpdateChildrenCallback(i, child);
+            //}
         }
 
         private void UpdateChildrenCallback(int index, Transform trans)
         {
-            int count = NoticeModel.Instance.GetServerCount();
+            int count = _getServerCount();
             if (index >= count)
             {
                 trans.gameObject.SetActive(false);
                 return;
             }
-            cdnServerInfo serverInfo = NoticeModel.Instance.GetServerInfoByIndex(index);
+            cdnServerInfo serverInfo = _getServerInfo(index);
             if(serverInfo == null)
             {
                 return;
             }
 
             Button button = trans.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => { OnServerBtnClick(serverInfo.serverId, trans); });
 
             Text txtServerName = trans.Find("ServerName").GetComponent<Text>();
@@ -122,8 +131,29 @@ namespace View
             //itemIcon.overrideSprite = Resources.Load(itemData.m_ItemCfg.m_Icon, typeof(Sprite)) as Sprite;
         }
 
+        private cdnServerInfo _getServerInfo(int index)
+        {
+            if(m_serverTabType == EServerTabType.BelongServer)
+            {
+                return LoginModel.Instance.GetServerInfo(index);
+            }
+            else if(m_serverTabType == EServerTabType.SuggetServer)
+            {
+                if (index == 0) {
+                    return NoticeModel.Instance.GetNewServer();
+                }
+            }
+            else if (m_serverTabType == EServerTabType.AllServer)
+            {
+                return NoticeModel.Instance.GetServerInfoByIndex(index);
+            }
+            return null;
+        }
+
         private void OnServerBtnClick(uint serverId, Transform trans)
         {
+            EventCenter.Broadcast<uint>(EGameEvent.eGameEvent_SelectServer, serverId);
+            OnClickClose();
         }
 
         public override void OnDisable()
@@ -139,6 +169,7 @@ namespace View
 
         private void onClickMenu(bool arg0)
         {
+            EServerTabType oldType = m_serverTabType;
             if(arg0)
             {
                 if(m_togBelong.isOn)
@@ -153,11 +184,14 @@ namespace View
                 {
                     m_serverTabType = EServerTabType.AllServer;
                 }
-
+                if(oldType != m_serverTabType)
+                {
+                    UpdateServreList();
+                }
             }
         }
 
-        public int GetServerCount()
+        private int _getServerCount()
         {
             if (m_serverTabType == EServerTabType.AllServer)
             {
@@ -165,7 +199,7 @@ namespace View
             }
             else if(m_serverTabType == EServerTabType.SuggetServer)
             {
-                cdnServerInfo info = NoticeModel.Instance.GetSuggestServer();
+                cdnServerInfo info = NoticeModel.Instance.GetNewServer();
                 if(info == null)
                 {
                     return 0;
@@ -174,7 +208,8 @@ namespace View
             }
             else if(m_serverTabType == EServerTabType.BelongServer)
             {
-                
+                //
+                return LoginModel.Instance.GetUserCount();
             }
 
             return 0;
@@ -182,14 +217,9 @@ namespace View
 
         void UpdateServreList()
         {
-            int count = NoticeModel.Instance.GetServerCount();
+            int count = _getServerCount();
             m_infinityScrollView.SetAmount(count);
-            m_infinityScrollView.updateChildrenCallback = UpdateChildrenCallback;
-            for (int i = 0; i < m_rectContent.childCount; i++)
-            {
-                var child = m_rectContent.GetChild(i);
-                UpdateChildrenCallback(i, child);
-            }
+            //m_infinityScrollView.updateChildrenCallback = UpdateChildrenCallback;
         }
 
         ////////////////////////////////Game event////////////////////////////////////
