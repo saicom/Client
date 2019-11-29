@@ -35,7 +35,10 @@ namespace Login {
             "aW5SZXESFAoMYWNjb3VudF9uYW1lGAEgASgJEg4KBnBhc3N3ZBgCIAEoCRIT",
             "CgtwbGF0Zm9ybV9pZBgDIAEoDSJcCgpTQ0xvZ2luQWNrEg4KBnJlc3VsdBgB",
             "IAEoBRIqCgl1c2VyX2xpc3QYAiADKAsyFy5sb2dpbi5tc2dMb2dpblVzZXJJ",
-            "bmZvEhIKCmxvZ2luX3Nlc3MYAyABKAliBnByb3RvMw=="));
+            "bmZvEhIKCmxvZ2luX3Nlc3MYAyABKAkiXwoPQ1NDcmVhdGVVc2VyUmVxEhQK",
+            "DGFjY291bnRfbmFtZRgBIAEoCRIOCgZwYXNzd2QYAiABKAkSEwoLcGxhdGZv",
+            "cm1faWQYAyABKA0SEQoJc2VydmVyX2lkGAQgASgNIjIKD1NDQ3JlYXRlVXNl",
+            "ckFjaxIOCgZyZXN1bHQYASABKAUSDwoHdXNlcl9pZBgCIAEoDWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
@@ -45,7 +48,9 @@ namespace Login {
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCCreateAccountAck), global::Login.SCCreateAccountAck.Parser, new[]{ "Result", "AccountName", "Passwd", "UserId", "LoginSess" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.msgLoginUserInfo), global::Login.msgLoginUserInfo.Parser, new[]{ "UserId", "ServerId", "LastLoginTs", "UserNick", "UserHeadIcon" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Login.CSLoginReq), global::Login.CSLoginReq.Parser, new[]{ "AccountName", "Passwd", "PlatformId" }, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCLoginAck), global::Login.SCLoginAck.Parser, new[]{ "Result", "UserList", "LoginSess" }, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCLoginAck), global::Login.SCLoginAck.Parser, new[]{ "Result", "UserList", "LoginSess" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Login.CSCreateUserReq), global::Login.CSCreateUserReq.Parser, new[]{ "AccountName", "Passwd", "PlatformId", "ServerId" }, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Login.SCCreateUserAck), global::Login.SCCreateUserAck.Parser, new[]{ "Result", "UserId" }, null, null, null)
           }));
     }
     #endregion
@@ -299,7 +304,7 @@ namespace Login {
   }
 
   /// <summary>
-  /// 创建角色
+  /// 创建账号
   /// </summary>
   public sealed partial class CSCreateAccountReq : pb::IMessage<CSCreateAccountReq> {
     private static readonly pb::MessageParser<CSCreateAccountReq> _parser = new pb::MessageParser<CSCreateAccountReq>(() => new CSCreateAccountReq());
@@ -506,7 +511,7 @@ namespace Login {
   }
 
   /// <summary>
-  /// 创建角色结果
+  /// 创建账号结果
   /// </summary>
   public sealed partial class SCCreateAccountAck : pb::IMessage<SCCreateAccountAck> {
     private static readonly pb::MessageParser<SCCreateAccountAck> _parser = new pb::MessageParser<SCCreateAccountAck>(() => new SCCreateAccountAck());
@@ -1320,6 +1325,361 @@ namespace Login {
           }
           case 26: {
             LoginSess = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 创建账号
+  /// </summary>
+  public sealed partial class CSCreateUserReq : pb::IMessage<CSCreateUserReq> {
+    private static readonly pb::MessageParser<CSCreateUserReq> _parser = new pb::MessageParser<CSCreateUserReq>(() => new CSCreateUserReq());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<CSCreateUserReq> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Login.LoginReflection.Descriptor.MessageTypes[7]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CSCreateUserReq() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CSCreateUserReq(CSCreateUserReq other) : this() {
+      accountName_ = other.accountName_;
+      passwd_ = other.passwd_;
+      platformId_ = other.platformId_;
+      serverId_ = other.serverId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public CSCreateUserReq Clone() {
+      return new CSCreateUserReq(this);
+    }
+
+    /// <summary>Field number for the "account_name" field.</summary>
+    public const int AccountNameFieldNumber = 1;
+    private string accountName_ = "";
+    /// <summary>
+    /// 游客账号密码为空
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string AccountName {
+      get { return accountName_; }
+      set {
+        accountName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "passwd" field.</summary>
+    public const int PasswdFieldNumber = 2;
+    private string passwd_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Passwd {
+      get { return passwd_; }
+      set {
+        passwd_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "platform_id" field.</summary>
+    public const int PlatformIdFieldNumber = 3;
+    private uint platformId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint PlatformId {
+      get { return platformId_; }
+      set {
+        platformId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "server_id" field.</summary>
+    public const int ServerIdFieldNumber = 4;
+    private uint serverId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint ServerId {
+      get { return serverId_; }
+      set {
+        serverId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as CSCreateUserReq);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(CSCreateUserReq other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (AccountName != other.AccountName) return false;
+      if (Passwd != other.Passwd) return false;
+      if (PlatformId != other.PlatformId) return false;
+      if (ServerId != other.ServerId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (AccountName.Length != 0) hash ^= AccountName.GetHashCode();
+      if (Passwd.Length != 0) hash ^= Passwd.GetHashCode();
+      if (PlatformId != 0) hash ^= PlatformId.GetHashCode();
+      if (ServerId != 0) hash ^= ServerId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (AccountName.Length != 0) {
+        output.WriteRawTag(10);
+        output.WriteString(AccountName);
+      }
+      if (Passwd.Length != 0) {
+        output.WriteRawTag(18);
+        output.WriteString(Passwd);
+      }
+      if (PlatformId != 0) {
+        output.WriteRawTag(24);
+        output.WriteUInt32(PlatformId);
+      }
+      if (ServerId != 0) {
+        output.WriteRawTag(32);
+        output.WriteUInt32(ServerId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (AccountName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(AccountName);
+      }
+      if (Passwd.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Passwd);
+      }
+      if (PlatformId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(PlatformId);
+      }
+      if (ServerId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(ServerId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(CSCreateUserReq other) {
+      if (other == null) {
+        return;
+      }
+      if (other.AccountName.Length != 0) {
+        AccountName = other.AccountName;
+      }
+      if (other.Passwd.Length != 0) {
+        Passwd = other.Passwd;
+      }
+      if (other.PlatformId != 0) {
+        PlatformId = other.PlatformId;
+      }
+      if (other.ServerId != 0) {
+        ServerId = other.ServerId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 10: {
+            AccountName = input.ReadString();
+            break;
+          }
+          case 18: {
+            Passwd = input.ReadString();
+            break;
+          }
+          case 24: {
+            PlatformId = input.ReadUInt32();
+            break;
+          }
+          case 32: {
+            ServerId = input.ReadUInt32();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
+  /// <summary>
+  /// 创建角色结果
+  /// </summary>
+  public sealed partial class SCCreateUserAck : pb::IMessage<SCCreateUserAck> {
+    private static readonly pb::MessageParser<SCCreateUserAck> _parser = new pb::MessageParser<SCCreateUserAck>(() => new SCCreateUserAck());
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SCCreateUserAck> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::Login.LoginReflection.Descriptor.MessageTypes[8]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SCCreateUserAck() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SCCreateUserAck(SCCreateUserAck other) : this() {
+      result_ = other.result_;
+      userId_ = other.userId_;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SCCreateUserAck Clone() {
+      return new SCCreateUserAck(this);
+    }
+
+    /// <summary>Field number for the "result" field.</summary>
+    public const int ResultFieldNumber = 1;
+    private int result_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int Result {
+      get { return result_; }
+      set {
+        result_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "user_id" field.</summary>
+    public const int UserIdFieldNumber = 2;
+    private uint userId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public uint UserId {
+      get { return userId_; }
+      set {
+        userId_ = value;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SCCreateUserAck);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SCCreateUserAck other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if (Result != other.Result) return false;
+      if (UserId != other.UserId) return false;
+      return true;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      if (Result != 0) hash ^= Result.GetHashCode();
+      if (UserId != 0) hash ^= UserId.GetHashCode();
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      if (Result != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(Result);
+      }
+      if (UserId != 0) {
+        output.WriteRawTag(16);
+        output.WriteUInt32(UserId);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      if (Result != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(Result);
+      }
+      if (UserId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeUInt32Size(UserId);
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SCCreateUserAck other) {
+      if (other == null) {
+        return;
+      }
+      if (other.Result != 0) {
+        Result = other.Result;
+      }
+      if (other.UserId != 0) {
+        UserId = other.UserId;
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            input.SkipLastField();
+            break;
+          case 8: {
+            Result = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            UserId = input.ReadUInt32();
             break;
           }
         }

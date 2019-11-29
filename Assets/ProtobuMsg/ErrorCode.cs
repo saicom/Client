@@ -22,13 +22,14 @@ namespace ErrCode {
     static ErrorCodeReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChBlcnJvcl9jb2RlLnByb3RvEghlcnJfY29kZSrxAQoJRXJyb3JDb2RlEgsK",
+            "ChBlcnJvcl9jb2RlLnByb3RvEghlcnJfY29kZSqaAgoJRXJyb3JDb2RlEgsK",
             "B05vRXJyb3IQABITCg9Mb2dpbk90aGVyUGxhY2UQARITCg9Db25uZWN0R2Ft",
             "ZUZhaWwQAhISCg5Mb2dpbkV4Y2VwdGlvbhADEhQKEERiUXVlcnlFeGNlcHRp",
             "b24QBBIVChFEYkluc2VydEV4Y2VwdGlvbhAFEhUKEURiVXBkYXRlRXhjZXB0",
             "aW9uEAYSEQoNTG9naW5BdXRoRmFpbBAHEhIKDkxvZ2luTm9BY2NvdW50EAgS",
-            "FAoQSW52YWxpZE9wZXJhdGlvbhAJEhgKFFRhcmdldEZyaWVuZENvdW50TWF4",
-            "EApiBnByb3RvMw=="));
+            "FAoQSW52YWxpZE9wZXJhdGlvbhAJEhMKD0FjY291bnRSZXBlYXRlZBAKEhIK",
+            "DkNyZWF0ZVVzZXJGYWlsEAsSGAoUVGFyZ2V0RnJpZW5kQ291bnRNYXgQZGIG",
+            "cHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ErrCode.ErrorCode), }, null));
@@ -70,15 +71,26 @@ namespace ErrCode {
     /// 登录验证失败
     /// </summary>
     [pbr::OriginalName("LoginAuthFail")] LoginAuthFail = 7,
+    /// <summary>
+    /// 第三方平台无账号
+    /// </summary>
     [pbr::OriginalName("LoginNoAccount")] LoginNoAccount = 8,
     /// <summary>
     /// 非法操作
     /// </summary>
     [pbr::OriginalName("InvalidOperation")] InvalidOperation = 9,
     /// <summary>
+    /// 账号已存在
+    /// </summary>
+    [pbr::OriginalName("AccountRepeated")] AccountRepeated = 10,
+    /// <summary>
+    /// 创建角色失败，不存在账号
+    /// </summary>
+    [pbr::OriginalName("CreateUserFail")] CreateUserFail = 11,
+    /// <summary>
     /// 对方好友已达上限
     /// </summary>
-    [pbr::OriginalName("TargetFriendCountMax")] TargetFriendCountMax = 10,
+    [pbr::OriginalName("TargetFriendCountMax")] TargetFriendCountMax = 100,
   }
 
   #endregion

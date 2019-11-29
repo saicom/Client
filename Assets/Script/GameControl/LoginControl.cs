@@ -69,15 +69,37 @@ namespace Ctrl
             Debug.Log("register visitor");
         }
 
+        public void CreateNewUser(string accountName)
+        {
+            CSCreateUserReq req = new CSCreateUserReq();
+            req.PlatformId = (uint)EPlatformId.Official;
+            req.ServerId = LoginModel.Instance.SelectServerId;
+            req.AccountName = accountName;
+            NetworkManager.Instance.SendMsg(req, (int)MessageId.LoginCsCreateUserReq);
+            Debug.Log("create new user");
+        }
+
         public void EnterGame()
         {
             uint userId = LoginModel.Instance.RecentUserId;
             if(userId == 0)
             {
-                LoginControl.Instance.RegisterVisitor();
+                bool exist = SettingHelper.HasSetting(SettingDefine.AccountName);
+                if (exist)
+                {
+                    string accountName = SettingHelper.GetString(SettingDefine.AccountName);
+                    LoginControl.Instance.CreateNewUser(accountName);
+                }
+                else
+                {
+                    LoginControl.Instance.RegisterVisitor();
+                }
             }
-            Debug.LogError("enter game:"+userId);
-            StartConnectGate();
+            else
+            {
+                Debug.LogError("enter game:" + userId);
+                StartConnectGate();
+            }
             //CSLoginGameReq req = new CSLoginGameReq();
             //req.UserId = userId;
             //NetworkManager.Instance.SendMsg(req, (int)MessageId.GameCsLoginGameReq);
@@ -87,7 +109,7 @@ namespace Ctrl
         public void SetUserNick(String nick)
         {
             //check nick
-        
+
             //GameUserModel.Instance.UserNick = nick;
             CSSetNickNameReq req = new CSSetNickNameReq();
             req.NickName = nick;
@@ -166,15 +188,23 @@ namespace Ctrl
             //EventCenter.Broadcast(EGameEvent.eGameEvent_InitGameFinish);
         }
 
+        internal void OnCreateNewUser(uint userId)
+        {
+            LoginModel.Instance.RecentUserId = userId;
+            StartConnectGate();
+        }
+
         public void OnConnectSuccess(ServerType serverType)
         {
             UIUtils.CloseWaitingWnd();
             NoticeModel.Instance.Reset();
             LoginModel.Instance.Reset();
-            if(serverType == ServerType.LoginServer) {
+            if (serverType == ServerType.LoginServer)
+            {
                 OnConnectLogin();
             }
-            else if(serverType == ServerType.GateServer){
+            else if (serverType == ServerType.GateServer)
+            {
                 Debug.LogError("connect gate success");
             }
         }
@@ -242,7 +272,7 @@ namespace Ctrl
 
         private void OnConnectLogin()
         {
-            if(SettingHelper.HasSetting("AccountName") == false)
+            if (SettingHelper.HasSetting(SettingDefine.AccountName) == false)
             {
                 //本地无账号，则直接弹公告
                 var task = TaskManager.Instance.GenerateTask<LoadNoticeTask>();
@@ -261,8 +291,7 @@ namespace Ctrl
             SettingHelper.SetString(SettingDefine.Password, ack.Passwd);
             //ack.LoginSess;
             //add user
-            LoginModel.Instance.RecentUserId = ack.UserId;
-            LoginModel.Instance.AddNewUser(ack.UserId);
+            LoginModel.Instance.OnCreateAccount(ack);
 
             EnterGame();
         }

@@ -22,6 +22,7 @@ public class MsgHandlerManager : Singleton<MsgHandlerManager> {
         Register(MessageId.LoginScQueryServerAddrAck, OnLoginScQueryServerAddrAck); 
         Register(MessageId.LoginScLoginAck, OnLoginScLoginAck); 
         Register(MessageId.LoginScCreateAccountAck, OnLoginScCreateAccountAck); 
+        Register(MessageId.LoginScCreateUserAck, OnLoginScCreateUserAck); 
         //Register(MessageId.GameScLoginGameAck, OnGameScLoginGameAck); 
         //Register(MessageId.GameScSetNickNameAck, OnGameScSetNickNameAck); 
         //Register(MessageId.GameScItemChangeNtf, OnGameScItemChangeNtf); 
@@ -127,6 +128,28 @@ public class MsgHandlerManager : Singleton<MsgHandlerManager> {
             LoginControl.Instance.OnCreateAccountSuccess(msg);
 
             Debug.Log("register visitor success," + msg.AccountName + "," + msg.Passwd);
+        }
+        else
+        {
+            //EventCenter.Broadcast<int>(EGameEvent.eGameEvent_InitGameFinish, msg.Result);
+            EventCenter.Broadcast(EGameEvent.eGameEvent_InitGameFinish);
+        }
+    }
+    public void OnLoginScCreateUserAck(byte[] buffer, Int64 errCode)
+    {
+        SCCreateUserAck msg = new SCCreateUserAck();
+        msg = SCCreateUserAck.Parser.ParseFrom(buffer);
+        if (msg == null)
+        {
+            Debug.LogError("parse msg faild SCCreateUserAck");
+            return;
+        }
+
+        if (msg.Result == (int)ErrorCode.NoError)
+        {
+            LoginControl.Instance.OnCreateNewUser(msg.UserId);
+
+            Debug.Log("create new user success," + msg.UserId);
         }
         else
         {

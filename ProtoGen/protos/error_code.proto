@@ -12,8 +12,10 @@ enum ErrorCode
 	DbInsertException = 5;	//插入异常
 	DbUpdateException = 6;	//更新异常
 	LoginAuthFail = 7;		//登录验证失败
-	LoginNoAccount = 8;
+	LoginNoAccount = 8;		//第三方平台无账号
 	InvalidOperation = 9;	//非法操作
-	TargetFriendCountMax = 10;	//对方好友已达上限
+	AccountRepeated = 10;	//账号已存在
+	CreateUserFail = 11;	//创建角色失败，不存在账号
+	TargetFriendCountMax = 100;	//对方好友已达上限
 }
 

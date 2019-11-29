@@ -8,16 +8,18 @@ enum LoginId {
 
 enum MessageId {
 	Msg_Start_Id  = 0;
-	LOGIN_CS_CREATE_ACCOUNT_REQ      =      1;		//	创建角色 **CSCreateAccountReq **login.proto **login-*,db-*;system:login
-	LOGIN_SC_CREATE_ACCOUNT_ACK      =      2;		//	创建角色结果 **SCCreateAccountAck **login.proto **login-*,gate-*;system:login
+	LOGIN_CS_CREATE_ACCOUNT_REQ      =      1;		//	创建账号 **CSCreateAccountReq **login.proto **login-*,db-*;system:login
+	LOGIN_SC_CREATE_ACCOUNT_ACK      =      2;		//	创建账号结果 **SCCreateAccountAck **login.proto **login-*,gate-*;system:login
 	LOGIN_CS_LOGIN_REQ               =      3;		//	登录验证 **CSLoginReq **login.proto **login-*,db-*;system:login
 	LOGIN_SC_LOGIN_ACK               =      4;		//	登录验证结果 **SCLoginAck **login.proto **login-*,gate-*;system:login
-	LOGIN_CS_QUERY_SERVER_ADDR_REQ   =      5;		//	客户端请求gate服务器地址 **CSQueryServerAddrReq **login.proto **balance-*;system:login
+	LOGIN_CS_QUERY_SERVER_ADDR_REQ   =      5;		//	客户端请求gate服务器地址 **CSQueryServerAddrReq **login.proto **login-*;system:login
 	LOGIN_SC_QUERY_SERVER_ADDR_ACK   =      6;		//	客户端请求gate服务器地址 **SCQueryServerAddrAck **login.proto **client-*;system:login
+	LOGIN_CS_CREATE_USER_REQ         =      7;		//	创建账号 **CSCreateUserReq **login.proto **login-*,db-*;system:login
+	LOGIN_SC_CREATE_USER_ACK         =      8;		//	创建角色结果 **SCCreateUserAck **login.proto **login-*,gate-*;system:login
 	SERVER_CS_QUERY_GAME_ID_REQ      =    101;		//	请求游戏服务器id **CSQueryGameIdReq **server.proto **game-*;system:server
 	SERVER_SC_QUERY_GAME_ID_ACK      =    102;		//	请求游戏服务器id结果 **SCQueryGameIdAck **server.proto **gate-*;system:server
 	SERVER_SS_GAME_LOAD_NTF          =    103;		//	通知游戏服的负载人数 **SSGameLoadNtf **server.proto **gate-*;system:server
-	SERVER_CS_NOTIFY_GATE_ADDR_NTF   =    104;		//	gate服务器的地址通知 **CSNotifyGateAddrNtf **server.proto **balance-*;system:server
+	SERVER_CS_NOTIFY_GATE_ADDR_NTF   =    104;		//	gate服务器的地址通知 **CSNotifyGateAddrNtf **server.proto **login-*;system:server
 	SERVER_SS_CLIENT_SESSION_CLOSE_NTF =    200;		//	客户端断开通知 **SSClientSessionCloseNtf **server.proto **game-*;system:user
 	GAME_CS_LOGIN_GAME_REQ           =   1001;		//	客户端登录请求 **CSLoginGameReq **client_game.proto **gate-*,game-*,db-*;system:login
 	GAME_SC_LOGIN_GAME_ACK           =   1002;		//	客户端登录回应 **SCLoginGameAck **client_game.proto **game-*;system:login

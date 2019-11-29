@@ -6,7 +6,7 @@ package login;
 //*代表所有连接
 
 //客户端请求gate服务器地址
-message CSQueryServerAddrReq	//proj:balance-*;system:login
+message CSQueryServerAddrReq	//proj:login-*;system:login
 {
 	uint32 zone_id = 1;	//区id
 }
@@ -18,7 +18,7 @@ message SCQueryServerAddrAck	//proj:client-*;system:login
 }
 
 
-//创建角色
+//创建账号
 message CSCreateAccountReq //proj:login-*|db-*;system:login
 {
 	string	account_name = 1;			//游客账号密码为空
@@ -27,7 +27,7 @@ message CSCreateAccountReq //proj:login-*|db-*;system:login
 	uint32  server_id = 4;
 }
 
-//创建角色结果
+//创建账号结果
 message SCCreateAccountAck	//proj:login-*|gate-*;system:login
 {
 	int32 result = 1;
@@ -61,4 +61,21 @@ message SCLoginAck //proj:login-*|gate-*;system:login
 	int32 result = 1;
 	repeated msgLoginUserInfo user_list = 2;
 	string login_sess = 3;
+}
+
+//创建账号
+message CSCreateUserReq //proj:login-*|db-*;system:login
+{
+	string	account_name = 1;			//游客账号密码为空
+	string 	passwd = 2;
+	uint32  platform_id = 3;
+	uint32  server_id = 4;
+}
+
+
+//创建角色结果
+message SCCreateUserAck	//proj:login-*|gate-*;system:login
+{
+	int32 result = 1;
+	uint32 user_id = 2;
 }

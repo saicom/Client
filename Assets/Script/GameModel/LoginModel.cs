@@ -91,7 +91,7 @@ namespace Model
             }
         }
 
-        public void AddNewUser(SCCreateAccountAck ack)
+        public void OnCreateAccount(SCCreateAccountAck ack)
         {
             RecentUserId = ack.UserId;
             msgLoginUserInfo userInfo = new msgLoginUserInfo();
